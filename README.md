@@ -6,4 +6,4 @@ Leveraging Modern JavaScript Frameworks"
 
 by Philip Japikse, Kevin Grossnicklaus and Ben Dewey
 
-www.​apress.​com/​9781484253519
+https://www.amazon.com/Building-Applications-NET-Core-JavaScript/dp/1484253515
