@@ -1,23 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using System.Diagnostics;
 
 namespace SpyStore.Dal.EfStructures
 {
-    public class StoreContextFactory : IDesignTimeDbContextFactory<StoreContext> 
-    { 
-        public StoreContext CreateDbContext(string[] args) 
-        { 
-            var optionsBuilder = new DbContextOptionsBuilder<StoreContext>(); 
+    public class StoreContextFactory : IDesignTimeDbContextFactory<StoreContext>
+    {
+        public StoreContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<StoreContext>();
+
+            var connectionString =
+                @"Server=(localdb)\mssqllocaldb;Database=SpyStore21;Trusted_Connection=True;MultipleActiveResultSets=true;";
+
+            optionsBuilder.UseSqlServer(connectionString, options => options.EnableRetryOnFailure());
+           
+            optionsBuilder.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
             
-            var connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SpyStore21;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"; 
-            optionsBuilder.UseSqlServer(connectionString, options => options.EnableRetryOnFailure()); 
-            optionsBuilder.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning)); 
-            
-            Debug.WriteLine(connectionString); 
-            
-            return new StoreContext(optionsBuilder.Options); 
-        } 
+            Console.WriteLine(connectionString);
+            return new StoreContext(optionsBuilder.Options);
+        }
     }
 }
