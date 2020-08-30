@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using SpyStore.Models.Entities.Base;
@@ -14,5 +15,9 @@ namespace SpyStore.Models.Entities
 
         [InverseProperty(nameof(OrderDetail.OrderNavigation))]
         public List<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+
+        [Display(Name = "Total")] 
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)] 
+        public decimal OrderTotal { get; set; }
     }
 }

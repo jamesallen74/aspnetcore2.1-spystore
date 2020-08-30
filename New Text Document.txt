@@ -1,2 +1,0 @@
-Build Web Applications with .Net Core 2.1
-Japikse
