@@ -1,5 +1,5 @@
 # aspnetcore2.1-spystore
-This is the SpyStore project from the book 
+This is my personal implementation of the "SpyStore" project from the book... 
 
 **"Building Web Applications with .NET Core 2.1 and JavaScript - Leveraging Modern JavaScript Frameworks"**
 
