@@ -32,33 +32,33 @@ namespace SpyStore.Dal.Tests.CrudTests
       }
     }
 
-    //[Fact (Skip = "") ]
-    //public void ShouldThrowConcurrencyException()
-    //{
-    //  var (context1, context2) = GetTwoContextsWithSharedConnection();
-    //  var strategy = context1.Database.CreateExecutionStrategy();
-    //  strategy.Execute(() =>
-    //  {
-    //    using (var trans = context1.Database.BeginTransaction())
-    //    {
-    //      CreateCategoryAndProducts(context1);
-    //      //Create a new Context Instance to clear the entries
-    //      context2.Database.UseTransaction(trans.GetDbTransaction());
-    //      var cat1 = context1.Categories.First();
-    //      var cat2 = context2.Categories.First();
-    //      cat1.CategoryName = "First In";
-    //      context1.SaveChanges();
-    //      cat2.CategoryName = "Last in";
-    //      var ex = Assert.Throws<DbUpdateConcurrencyException>(() => context2.SaveChanges());
-    //      var entry = ex.Entries[0];
-    //      PropertyValues originalProps = entry.OriginalValues;
-    //      PropertyValues currentProps = entry.CurrentValues;
-    //      //This needs another database call
-    //      PropertyValues databaseProps = entry.GetDatabaseValues();
-    //      trans.Rollback();
-    //    }
-    //  });
-    //}
+    [Fact]
+    public void ShouldThrowConcurrencyException()
+    {
+      var (context1, context2) = GetTwoContextsWithSharedConnection();
+      var strategy = context1.Database.CreateExecutionStrategy();
+      strategy.Execute(() =>
+      {
+        using (var trans = context1.Database.BeginTransaction())
+        {
+          CreateCategoryAndProducts(context1);
+          //Create a new Context Instance to clear the entries
+          context2.Database.UseTransaction(trans.GetDbTransaction());
+          var cat1 = context1.Categories.First();
+          var cat2 = context2.Categories.First();
+          cat1.CategoryName = "First In";
+          context1.SaveChanges();
+          cat2.CategoryName = "Last in";
+          var ex = Assert.Throws<DbUpdateConcurrencyException>(() => context2.SaveChanges());
+          var entry = ex.Entries[0];
+          PropertyValues originalProps = entry.OriginalValues;
+          PropertyValues currentProps = entry.CurrentValues;
+          //This needs another database call
+          PropertyValues databaseProps = entry.GetDatabaseValues();
+          trans.Rollback();
+        }
+      });
+    }
 
     [Fact]
     public void ShouldSetEntityStateForAnObjectGraph()

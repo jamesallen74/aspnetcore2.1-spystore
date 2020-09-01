@@ -12,26 +12,26 @@ namespace SpyStore.Dal.Tests.CrudTests
   [Collection("SpyStore.Dal")]
   public class ReadTests : TestBase
   {
-    //[Fact(Skip = "")]
-    //public void ShouldConnectRelatedInstances()
-    //{
-    //  var (context1, context2) = GetTwoContextsWithSharedConnection();
-    //  var strategy = context1.Database.CreateExecutionStrategy();
-    //  strategy.Execute(() =>
-    //  {
-    //    using (var trans = context1.Database.BeginTransaction())
-    //    {
-    //      CreateCategoryAndProducts(context1);
-    //      //Create a new Context Instance to clear the entries
-    //      context2.Database.UseTransaction(trans.GetDbTransaction());
-    //      //Load products
-    //      var products = context2.Products.ToList();
-    //      var cat = context2.Categories.FirstOrDefault();
-    //      Assert.Equal(2, cat.Products.Count);
-    //      trans.Rollback();
-    //    }
-    //  });
-    //}
+    [Fact]
+    public void ShouldConnectRelatedInstances()
+    {
+      var (context1, context2) = GetTwoContextsWithSharedConnection();
+      var strategy = context1.Database.CreateExecutionStrategy();
+      strategy.Execute(() =>
+      {
+        using (var trans = context1.Database.BeginTransaction())
+        {
+          CreateCategoryAndProducts(context1);
+          //Create a new Context Instance to clear the entries
+          context2.Database.UseTransaction(trans.GetDbTransaction());
+          //Load products
+          var products = context2.Products.ToList();
+          var cat = context2.Categories.FirstOrDefault();
+          Assert.Equal(2, cat.Products.Count);
+          trans.Rollback();
+        }
+      });
+    }
 
     [Fact]
     public void ShouldGetAllRecords()
@@ -152,52 +152,52 @@ namespace SpyStore.Dal.Tests.CrudTests
       var ordersNoFilter = Context.Orders.IgnoreQueryFilters().ToList();
     }
 
-    //[Fact(Skip = "")]
-    //public void ShouldNotTrackEntities()
-    //{
-    //  var (context1, context2) = GetTwoContextsWithSharedConnection();
-    //  var strategy = context1.Database.CreateExecutionStrategy();
-    //  strategy.Execute(() =>
-    //  {
-    //    using (var trans = context1.Database.BeginTransaction())
-    //    {
-    //      CreateCategoryAndProducts(context1);
-    //      //Create a new Context Instance to clear the entries
-    //      context2.Database.UseTransaction(trans.GetDbTransaction());
-    //      //Load products with tracking
-    //      var products = context2.Products.ToList();
-    //      //The two products are tracked
-    //      Assert.Equal(2, context2.ChangeTracker.Entries<EntityBase>().Count());
-    //      //Load the category without tracking
-    //      var cat = context2.Categories.AsNoTracking().FirstOrDefault();
-    //      //Still just the two products are tracked
-    //      Assert.Equal(2, context2.ChangeTracker.Entries<EntityBase>().Count());
-    //      trans.Rollback();
-    //    }
-    //  });
-    //}
+    [Fact]
+    public void ShouldNotTrackEntities()
+    {
+      var (context1, context2) = GetTwoContextsWithSharedConnection();
+      var strategy = context1.Database.CreateExecutionStrategy();
+      strategy.Execute(() =>
+      {
+        using (var trans = context1.Database.BeginTransaction())
+        {
+          CreateCategoryAndProducts(context1);
+          //Create a new Context Instance to clear the entries
+          context2.Database.UseTransaction(trans.GetDbTransaction());
+          //Load products with tracking
+          var products = context2.Products.ToList();
+          //The two products are tracked
+          Assert.Equal(2, context2.ChangeTracker.Entries<EntityBase>().Count());
+          //Load the category without tracking
+          var cat = context2.Categories.AsNoTracking().FirstOrDefault();
+          //Still just the two products are tracked
+          Assert.Equal(2, context2.ChangeTracker.Entries<EntityBase>().Count());
+          trans.Rollback();
+        }
+      });
+    }
 
-    //[Fact(Skip = "")]
-    //public void ShouldNotTrackAnyEntitiesForContext()
-    //{
-    //  var (context1, context2) = GetTwoContextsWithSharedConnection();
-    //  var strategy = context1.Database.CreateExecutionStrategy();
-    //  strategy.Execute(() =>
-    //  {
-    //    using (var trans = context1.Database.BeginTransaction())
-    //    {
-    //      CreateCategoryAndProducts(context1);
-    //      //Create a new Context Instance to clear the entries
-    //      context2.Database.UseTransaction(trans.GetDbTransaction());
-    //      context2.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-    //      //Load products with no tracking
-    //      var products = context2.Products.ToList();
-    //      //The two products are not tracked
-    //      Assert.Empty(context2.ChangeTracker.Entries<EntityBase>());
-    //      trans.Rollback();
-    //    }
-    //  });
-    //}
+    [Fact]
+    public void ShouldNotTrackAnyEntitiesForContext()
+    {
+      var (context1, context2) = GetTwoContextsWithSharedConnection();
+      var strategy = context1.Database.CreateExecutionStrategy();
+      strategy.Execute(() =>
+      {
+        using (var trans = context1.Database.BeginTransaction())
+        {
+          CreateCategoryAndProducts(context1);
+          //Create a new Context Instance to clear the entries
+          context2.Database.UseTransaction(trans.GetDbTransaction());
+          context2.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+          //Load products with no tracking
+          var products = context2.Products.ToList();
+          //The two products are not tracked
+          Assert.Empty(context2.ChangeTracker.Entries<EntityBase>());
+          trans.Rollback();
+        }
+      });
+    }
 
     [Fact]
     public void ShouldGetDataWithFromSql()

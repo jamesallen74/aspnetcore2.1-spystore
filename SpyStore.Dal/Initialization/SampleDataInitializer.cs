@@ -20,7 +20,7 @@ namespace SpyStore.Dal.Initialization
         internal static void ResetIdentity(StoreContext context)
         {
             var tables = new[] {"Categories","Customers",
-                                "OrderDetails","Orders","Products","ShoppingCartRecords"};
+        "OrderDetails","Orders","Products","ShoppingCartRecords"};
             foreach (var itm in tables)
             {
                 var rawSqlString = $"DBCC CHECKIDENT (\"Store.{itm}\", RESEED, 0);";

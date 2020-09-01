@@ -72,7 +72,7 @@ namespace SpyStore.Dal.EfStructures
             modelBuilder.Entity<ShoppingCartRecord>().HasQueryFilter(x => x.CustomerId == CustomerId);
             modelBuilder.Entity<ShoppingCartRecord>(entity =>
             {
-                entity.HasIndex(e => new { ShoppingCartRecordId = e.Id, e.ProductId, e.CustomerId })
+                entity.HasIndex(e => new {ShoppingCartRecordId = e.Id, e.ProductId, e.CustomerId})
                     .HasName("IX_ShoppingCart").IsUnique();
                 entity.Property(e => e.DateCreated).HasColumnType("datetime").HasDefaultValueSql("getdate()");
                 entity.Property(e => e.Quantity).HasDefaultValue(1);
