@@ -71,9 +71,7 @@ namespace SpyStore.Dal.Tests.RepoTests
 
             var orderRepo = new OrderRepo(Context, new OrderDetailRepo(Context));
             var record = orderRepo.GetOneWithDetails(1);
-            var foo = "foo";
           }
         }
-
     }
 }

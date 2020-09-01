@@ -1,18 +1,18 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using SpyStore.Models.Entities;
+using SpyStore.Models.ViewModels;
+using SpyStore.Mvc.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using SpyStore.Models.Entities;
-using SpyStore.Models.ViewModels;
-using SpyStore.Mvc.Models.ViewModels;
 
 namespace SpyStore.Mvc.Support
 {
-  public class SpyStoreServiceWrapper : ISpyStoreServiceWrapper
+    public class SpyStoreServiceWrapper : ISpyStoreServiceWrapper
   {
     private readonly HttpClient _client;
     private readonly ServiceSettings _settings;

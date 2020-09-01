@@ -19,7 +19,6 @@ namespace SpyStore.Service.Tests.TestClasses
         {
             RootAddress = "api/shoppingcartrecord";
             SampleDataInitializer.InitializeData(new StoreContextFactory().CreateDbContext(null));
-            var foo = "foo";
         }
         public override void Dispose()
         {

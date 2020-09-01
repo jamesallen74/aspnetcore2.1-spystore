@@ -37,7 +37,6 @@ namespace SpyStore.Service.Controllers
         public ActionResult<string> Get(int id)
         {
             throw new Exception("Test Exception");
-            return "value";
         }
 
         // POST api/values
