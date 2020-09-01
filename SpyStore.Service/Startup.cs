@@ -96,7 +96,7 @@ namespace SpyStore.Service
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     var context = serviceScope.ServiceProvider.GetRequiredService<StoreContext>();
-                    SampleDataInitializer.InitializeData(context);
+                    //SampleDataInitializer.InitializeData(context);
                 }
             }
 

@@ -14,7 +14,7 @@ namespace SpyStore.Dal.EfStructures
             var optionsBuilder = new DbContextOptionsBuilder<StoreContext>();
             
             var connectionString =
-                @"Server=(localdb)\mssqllocaldb;Database=SpyStore21;Trusted_Connection=True;MultipleActiveResultSets=true;";
+                @"Server=(localdb)\MSSQLLocalDB;Database=SpyStore21;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=true";
             
             optionsBuilder
               .UseSqlServer(connectionString, options => options.EnableRetryOnFailure());
